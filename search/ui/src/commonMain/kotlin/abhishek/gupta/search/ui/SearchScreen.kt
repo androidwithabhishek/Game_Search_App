@@ -173,6 +173,7 @@ fun SearchScreenContent(
                                 Text("No results found.")
                             }
                         }
+
                     }
                 }
 

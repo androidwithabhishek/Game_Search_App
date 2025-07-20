@@ -25,8 +25,13 @@ class SearchViewModel(private val searchGameUseCase: SearchGamesUseCase) : ViewM
     val uiState = _uiState.asStateFlow()
 
     private val _query = MutableStateFlow("")
-    fun updateQuery(q: String){
-        _query.update { q }
+
+
+    fun updateQuery(q: String) {
+        _query.update {
+            q
+
+        }
     }
 
     init {
@@ -35,13 +40,14 @@ class SearchViewModel(private val searchGameUseCase: SearchGamesUseCase) : ViewM
                 .filter { it.isNotBlank() }
                 .distinctUntilChanged()
                 .debounce(500)
-                .collectLatest { query->
+                .collectLatest { query ->
                     search(query)
                 }
         }
     }
 
-    fun search(q: String) = searchGameUseCase.invoke(q)
+    fun search(q: String) =
+        searchGameUseCase.invoke(q)
         .onStart {
             _uiState.update { SearchScreen.UiState(isLoading = true) }
         }.onEach { result ->
