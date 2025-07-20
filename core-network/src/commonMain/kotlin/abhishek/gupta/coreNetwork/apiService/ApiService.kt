@@ -24,6 +24,8 @@ class ApiService(val httpClient: HttpClient) {
             Result.failure(e)
         }
 
+
+
     }
 
     suspend fun search(q: String): Result<GameResponse> {
