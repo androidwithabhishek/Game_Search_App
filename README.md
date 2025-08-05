@@ -63,7 +63,7 @@ Big thanks to **Himanshu Gaur** for his amazing KMM + RAWG tutorial, which inspi
 
 📹 [Watch his YouTube video here](https://www.youtube.com/@HimanshuGaur)
 
-🔗 GitHub: [@HimanshuGaur](https://github.com/HimanshuGaur)
+🔗 GitHub: [@HimanshuGaur]([https://github.com/HimanshuGaur](https://github.com/himanshuGaur684))
 
 ---
 
