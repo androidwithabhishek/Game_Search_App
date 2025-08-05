@@ -18,18 +18,18 @@ A cross-platform (Android + iOS) **Game Search App** built using **Kotlin Multip
 - 📊 Detailed Game Info screen with additional metadata
 
 ---
-
 ## 📸 Screenshots
 
-| Home List (Paging)           | Search Games                   | Game Details                     |
-|------------------------------|--------------------------------|----------------------------------|
-| ![Home](screenshots/fir.jpg) | ![Search](screenshots/sec.jpg) | ![Details](screenshots/thir.jpg) |
+| Home Screen with Collapsible Top App Bar | Unlimited Game List with Paging | Detail Screen (Add Game to Favorites) |
+|------------------------------------------|----------------------------------|----------------------------------------|
+| <img src="screenshots/fir.jpg" width="300"/> | <img src="screenshots/sec.jpg" width="300"/> | <img src="screenshots/thir.jpg" width="300"/> |
 
-| Favorite Games                     | Collapsing Toolbar                 |
-|------------------------------------|------------------------------------|
-| ![Favorites](screenshots/four.jpg) | ![Collapsing](screenshots/fiv.jpg) |
+| Favorite Screen (Remove Game from Favorites) | Real-time Search Screen |
+|----------------------------------------------|--------------------------|
+| <img src="screenshots/four.jpg" width="300"/> | <img src="screenshots/fiv.jpg" width="300"/> |
 
-> *(Add these 5 screenshots in a `/screenshots/` folder in the root of your project.)*
+
+
 
 ---
 
