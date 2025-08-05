@@ -12,18 +12,24 @@ import abhishek.gupta.game.domain.repositroy.GameRepository
 
 class GameRepositoryImpl(val apiService: ApiService, private val appDatabase: AppDatabase) :
     GameRepository {
-    override suspend fun getGames(): Result<List<Game>> {
 
-        val result = apiService.getGames()
+    private val pageSize = 20
+    override suspend fun getGames(page: Int): Result<List<Game>> {
+
+        val result = apiService.getGames(page = page, pageSize = pageSize)
 
 
-        return if (result.isSuccess) {
-            Result.success(result.getOrThrow().results.toDomainListOfGame())
+        return  if (result.isSuccess) {
+
+           Result.success(result.getOrThrow().results.toDomainListOfGame())
+
         } else {
-            Result.failure(result.exceptionOrNull()!!)
+           Result.failure(result.exceptionOrNull()!!)
         }
     }
+    fun resetPaging() {
 
+    }
     override suspend fun getDetails(id: Int): Result<GameDetails> {
 
         val result = apiService.getDetail(id)

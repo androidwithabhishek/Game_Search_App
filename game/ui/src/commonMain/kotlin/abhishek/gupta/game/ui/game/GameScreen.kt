@@ -31,6 +31,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -43,6 +44,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 
 import org.koin.compose.viewmodel.koinViewModel
@@ -62,11 +64,15 @@ fun GameScreen(
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
+
+
+
     GameScreenContent(
         modifier = modifier.fillMaxSize().padding(top = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()), uiState = uiState.value,
         onFavoriteClick = onFavoriteClick,
         onSearchClick = onSearchClick,
-        onClick = onGameClick
+        onClick = onGameClick,
+        viewModel = viewModel
     )
 
 }
@@ -77,13 +83,28 @@ fun GameScreenContent(
     uiState: GameScreen.UiState,
     onFavoriteClick: () -> Unit,
     onSearchClick: () -> Unit,
-    onClick: (Int) -> Unit
+    onClick: (Int) -> Unit,
+    viewModel: GameViewModel
 ) {
     val listState = rememberLazyListState()
+    val shouldLoadMore by remember {
+        derivedStateOf {
+            val lastVisibleItem = listState.layoutInfo.visibleItemsInfo.lastOrNull()
+            val totalItems = listState.layoutInfo.totalItemsCount
+            lastVisibleItem != null && lastVisibleItem.index >= totalItems - 5
+        }
+    }
     val scrollOffset = remember { derivedStateOf { listState.firstVisibleItemScrollOffset } }
     val offsetY by animateDpAsState(targetValue = (-scrollOffset.value / 3).dp.coerceAtLeast((-56).dp))
     val AppBarHeight = 56.dp // Standard TopAppBar height
 
+    if (shouldLoadMore && !uiState.isLoading && uiState.error.isBlank()) {
+        LaunchedEffect(Unit) {
+            // trigger next page load
+
+            viewModel.getGames()
+        }
+    }
     Box(modifier = modifier.fillMaxSize().background(MaterialTheme.colors.background)) {
 
         LazyColumn(
@@ -147,7 +168,23 @@ fun GameScreenContent(
                     }
                 }
             }
+
+            if (uiState.isLoading) {
+                item {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                }
+            }
         }
+
+
+
 
         TopAppBar(
             title = { Text("ABHISHEK GUPTA APP") },

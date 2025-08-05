@@ -10,13 +10,15 @@ import io.ktor.client.request.parameter
 class ApiService(val httpClient: HttpClient) {
 
     //    https://api.rawg.io/api/games?key=14f1474b9ec843f3b67bc235e4834a14
-//    https://api.rawg.io/api/games/4200?key=14f1474b9ec843f3b67bc235e4834a14
-    suspend fun getGames(): Result<GameResponse> {
+
+    suspend fun getGames(page: Int, pageSize: Int): Result<GameResponse> {
 
         return try {
             val response = httpClient.get("api/games") {
                 url {
                     parameter("key", "14f1474b9ec843f3b67bc235e4834a14")
+                    parameter("page", page)
+                    parameter("page_size", pageSize)
                 }
             }.body<GameResponse>()
             Result.success(response)
@@ -27,7 +29,7 @@ class ApiService(val httpClient: HttpClient) {
 
 
     }
-
+    //    https://api.rawg.io/api/games/4200?key=14f1474b9ec843f3b67bc235e4834a14
     suspend fun search(q: String): Result<GameResponse> {
         return try {
             val response = httpClient.get("api/games") {

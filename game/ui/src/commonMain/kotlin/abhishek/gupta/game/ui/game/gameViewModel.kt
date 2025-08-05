@@ -3,6 +3,10 @@ package abhishek.gupta.game.ui.game
 import abhishek.gupta.common.domain.model.Game
 
 import abhishek.gupta.game.domain.useCases.GetGameUseCases
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,30 +21,54 @@ class GameViewModel(private val getGameUseCases: GetGameUseCases) : ViewModel() 
 
     private val _uiState = MutableStateFlow(GameScreen.UiState())
     val uiState = _uiState.asStateFlow()
+    private var currentPage = 1
+    private var isLoading = false
 
     init {
         getGames()
 
     }
 
-    fun getGames() = getGameUseCases.invoke().onStart {
+//    fun getGames() = getGameUseCases.invoke(currentPage).onStart {
+//
+//        _uiState.update { GameScreen.UiState(isLoading = true) }
+//
+//    }.onEach { result ->
+//        result.onSuccess { data ->
+//            _uiState.update {
+//                GameScreen.UiState(data = data)
+//            }
+//
+//
+//        }.onFailure { error ->
+//            _uiState.update {
+//                GameScreen.UiState(error = error.message.toString())
+//            }
+//        }
+//    }.launchIn(viewModelScope)
+    fun getGames() {
+        if (isLoading) return
+        isLoading = true
 
-        _uiState.update { GameScreen.UiState(isLoading = true) }
-
-    }.onEach { result ->
-        result.onSuccess { data ->
-            _uiState.update {
-                GameScreen.UiState(data = data)
+        getGameUseCases(currentPage).onStart {
+            _uiState.update { it.copy(isLoading = true) }
+        }.onEach { result ->
+            result.onSuccess { games ->
+                _uiState.update {
+                    it.copy(
+                        data = (it.data ?: emptyList()) + games,
+                        isLoading = false
+                    )
+                }
+                currentPage++
+            }.onFailure { e ->
+                _uiState.update {
+                    it.copy(error = e.message ?: "Unknown Error", isLoading = false)
+                }
             }
-
-
-        }.onFailure { error ->
-            _uiState.update {
-                GameScreen.UiState(error = error.message.toString())
-            }
-        }
-    }.launchIn(viewModelScope)
-
+            isLoading = false
+        }.launchIn(viewModelScope)
+    }
 
 }
 

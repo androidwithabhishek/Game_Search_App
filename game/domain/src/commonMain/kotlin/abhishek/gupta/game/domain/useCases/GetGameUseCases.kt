@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.flowOn
 
 class GetGameUseCases(private val gameRepository: GameRepository) {
 
-    operator fun invoke() = flow<Result<List<Game>>> {
-        emit(gameRepository.getGames())
+    operator fun invoke(page: Int) = flow<Result<List<Game>>> {
+        emit(gameRepository.getGames(page))
 
     }.catch { error ->
         emit(Result.failure(error))

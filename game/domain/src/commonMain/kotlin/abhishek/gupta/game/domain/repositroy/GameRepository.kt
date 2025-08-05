@@ -6,7 +6,7 @@ import abhishek.gupta.game.domain.model.GameDetails
 
 interface GameRepository {
 
-    suspend fun getGames():Result<List<Game>>
+    suspend fun getGames(page: Int):Result<List<Game>>
 
     suspend fun  getDetails(id:Int):Result<GameDetails>
 
