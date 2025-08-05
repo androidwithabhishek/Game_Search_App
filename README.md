@@ -21,13 +21,13 @@ A cross-platform (Android + iOS) **Game Search App** built using **Kotlin Multip
 
 ## 📸 Screenshots
 
-| Home List (Paging) | Search Games | Game Details |
-|--------------------|--------------|--------------|
-| ![Home](screenshots/screen1.png) | ![Search](screenshots/screen2.png) | ![Details](screenshots/screen3.png) |
+| Home List (Paging) | Search Games                   | Game Details                    |
+|--------------------|--------------------------------|---------------------------------|
+| ![Home](screenshots/fir.jpg) | ![Search](screenshots/sec.jpg) | ![Details](screenshots/thi.jpg) |
 
-| Favorite Games | Collapsing Toolbar |
-|----------------|--------------------|
-| ![Favorites](screenshots/screen4.png) | ![Collapsing](screenshots/screen5.png) |
+| Favorite Games                     | Collapsing Toolbar                 |
+|------------------------------------|------------------------------------|
+| ![Favorites](screenshots/four.jpg) | ![Collapsing](screenshots/fiv.jpg) |
 
 > *(Add these 5 screenshots in a `/screenshots/` folder in the root of your project.)*
 
