@@ -1,14 +1,83 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
+# 🎮 Game Search App - KMM
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+A cross-platform (Android + iOS) **Game Search App** built using **Kotlin Multiplatform Mobile (KMM)** and powered by the [RAWG Video Games Database API](https://rawg.io/apidocs). This app helps users search, browse, and favorite their favorite games across platforms.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+---
+
+## 🚀 Features
+
+- 🔍 Search and display list of games using **RAWG API**
+- ⚡ Built with **Ktor Client** for networking
+- 📄 Paginated game list using **Jetpack Paging**
+- 🗃️ Local storage with **SQLDelight**
+- ❤️ Mark games as favorites (stored locally)
+- 🧪 Dependency Injection with **Koin**
+- 🌗 Dynamic Theme Support (Dark / Light Mode)
+- ⬇️ Collapsable TopAppBar with motion effects
+- 📱 Fully responsive for Android & iOS
+- 📊 Detailed Game Info screen with additional metadata
+
+---
+## 📸 Screenshots
+
+| Home Screen with Collapsible Top App Bar | Unlimited Game List with Paging | Detail Screen (Add Game to Favorites) |
+|------------------------------------------|----------------------------------|----------------------------------------|
+| <img src="screenshots/fir.jpg" width="300"/> | <img src="screenshots/sec.jpg" width="300"/> | <img src="screenshots/thir.jpg" width="300"/> |
+
+| Favorite Screen (Remove Game from Favorites) | Real-time Search Screen |
+|----------------------------------------------|--------------------------|
+| <img src="screenshots/four.jpg" width="300"/> | <img src="screenshots/fiv.jpg" width="300"/> |
 
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+
+
+---
+
+## 🧩 Tech Stack
+
+### Shared Code (KMM)
+- **Ktor** – HTTP client
+- **Kotlinx Serialization** – JSON parsing
+- **SQLDelight** – Multiplatform DB
+- **Koin** – Dependency Injection
+
+### Android Specific
+- **Jetpack Compose** – UI Toolkit
+- **Paging 3** – Pagination
+- **Coil** – Image loading
+- **Accompanist** – UI utilities (for collapsing toolbar)
+
+---
+
+## 📦 Modules
+
+- `shared`: KMM module with networking, repository, models, database
+- `androidApp`: Android-specific UI and DI
+- `iosApp`: iOS UI using SwiftUI (can be built later)
+
+---
+
+## 🙏 Special Thanks
+
+Big thanks to **Himanshu Gaur** for his amazing KMM + RAWG tutorial, which inspired the base of this project.
+
+📹 [Watch his YouTube video here](https://www.youtube.com/@HimanshuGaur)
+
+🔗 GitHub: [@HimanshuGaur684](https://github.com/himanshuGaur684)
+
+
+---
+
+## 🔧 Improvements Made Beyond Original Video
+
+This project expands on Himanshu's tutorial with:
+
+- ✅ **Jetpack Paging 3 Integration**
+- ✅ **SQLDelight-based Favorites with Toggle & Save**
+- ✅ **Collapsing TopAppBar with Game Image**
+- ✅ **More Detailed Game Info (Genres, Tags, Rating, Platforms)**
+- ✅ **Dynamic Theming (Dark / Light)**
+- ✅ **Better Architecture with Multi-Module Setup**
+
+---
+
